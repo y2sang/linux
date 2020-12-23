@@ -1,0 +1,5 @@
+#일정 시간이 지난 프로세스 출력
+ps -eo comm,pid,etimes | awk '/^procname/ {if ($3 > 300) { print $2}}'
+
+#일정 시간이 지난 프로세스 KILL
+kill -9 $(ps -eo comm,pid,etimes | awk '/^procname/ {if ($3 > 300) { print $2}}')

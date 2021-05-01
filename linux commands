@@ -6,3 +6,9 @@ kill -9 $(ps -eo comm,pid,etimes | awk '/^procname/ {if ($3 > 300) { print $2}}'
 
 #send mail
 echo 'Hello!' | mail -s 'TEST MAIL' bitnami
+
+#좀비 프로세스 찾기
+ps -ef | grep defunct | grep -v grep
+
+#좀비 프로세스 죽이기
+ps -ef | grep defunct | awk '{print $3}' | xargs kill -9
